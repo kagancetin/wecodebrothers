@@ -19,6 +19,7 @@ app.use(helmet());
 const index = require("./router/page/index.js");
 const admin = require("./router/admin/admin.js");
 const adminBlog = require("./router/admin/blog.js");
+const adminUser = require("./router/admin/user.js");
 
 
 //Middlewares
@@ -46,6 +47,7 @@ app.set("view engine", "ejs");
 //Routes
 app.use("/", index);
 app.use("/admin/blog", adminBlog);
+app.use("/admin/user", adminUser);
 app.use("/admin", admin);
 
 
