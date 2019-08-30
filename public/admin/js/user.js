@@ -12,13 +12,14 @@ var getUserforProfile = function (username) {
 
   $.ajax({
     type: "POST",
-    url: "/user/" + username,
+    url: "/admin/user/get/" + username,
     success: function (res) {
-      inputs.name.value = res.name;
-      inputs.about.value = res.about;
-      inputs.author.value = res.author;
-      inputs.email.value = res.email;
-      inputs.username.value = res.username;
+      console.log(res.data)
+      inputs.name.value = res.data.name;
+      inputs.about.value = res.data.about;
+      inputs.author.value = res.data.author;
+      inputs.email.value = res.data.email;
+      inputs.username.value = res.data.username;
     },
     dataType: "json"
   });
@@ -69,7 +70,7 @@ var patchUserforProfile = function (username) {
   }
   $.ajax({
     type: "PATCH",
-    url: "/user/" + username,
+    url: "/admin/user/profile/" + username,
     data: data,
     success: function (res, textStatus, jqXHR) {
       const status = jqXHR.status;
