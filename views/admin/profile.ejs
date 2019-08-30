@@ -1,0 +1,159 @@
+<% include header %>
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Profilim</h1>
+    <a href="/admin/dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+        class="fas fa-download fa-sm text-white-50"></i> Anasayfaya Git</a>
+  </div>
+  <div id="errorMessage" style="display: none" class="alert alert-warning">
+
+  </div>
+  <div id="successMessage" style="display: none" class="alert alert-success">
+  </div>
+  <!-- Page Heading -->
+  <div class="input-group mb-3">
+
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Ad Soyad</span>
+    </div>
+    <input type="text" class="form-control" aria-label="Default" id="name" aria-describedby="inputGroup-sizing-default">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Hakkında</span>
+    </div>
+    <textarea class="form-control" id="about" aria-label="With textarea"></textarea>
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Yazar Adı</span>
+    </div>
+    <input type="text" class="form-control" aria-label="Default" id="author"
+      aria-describedby="inputGroup-sizing-default">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">E-mail</span>
+    </div>
+    <input type="email" class="form-control" aria-label="Default" id="email"
+      aria-describedby="inputGroup-sizing-default">
+  </div>
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Profil Resmi</span>
+    </div>
+    <input type="file" class="form-control" aria-label="Default" id="profile_photo"
+      aria-describedby="inputGroup-sizing-default">
+  </div>
+
+  <a onclick="patchUser()" data-toggle="modal" data-target="#myModal" class="btn btn-success btn-icon-split">
+    <span class="icon text-white-50">
+      <i class="fas fa-check"></i>
+    </span>
+    <span class="text">Değişiklikleri
+      Kaydet</span>
+  </a>
+
+  <br><br>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Kullanıcı Adı</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" id="inputUsername"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+    <div class="col-sm-6">
+
+    </div>
+  </div>
+  <a onclick="patchUsername()" data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-icon-split">
+    <span class="icon text-white-50">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span>
+    <span class="text">Kullanıcı Adını Değiştir</span>
+  </a>
+  <br><br>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Yeni Şifre</span>
+        </div>
+        <input type="password" class="form-control" aria-label="Default" id="newpass"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Yeni Şifre Kontrol</span>
+        </div>
+        <input type="password" class="form-control" aria-label="Default" id="checkpass"
+          aria-describedby="inputGroup-sizing-default">
+      </div>
+    </div>
+  </div>
+
+
+  <a onclick="patchPassword()" data-toggle="modal" data-target="#myModal" class="btn btn-warning btn-icon-split">
+    <span class="icon text-white-50">
+      <i class="fas fa-exclamation-triangle"></i>
+    </span>
+    <span class="text">Şifreni Değiştir</span>
+  </a>
+
+</div>
+<!-- /.container-fluid -->
+
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Şifrenizi giriniz !</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Şifre</span>
+          </div>
+          <input type="password" class="form-control" aria-label="Default" id="password"
+            aria-describedby="inputGroup-sizing-default">
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button onclick="patchUserforProfile('<%= data.username %>')" type="button" class="btn btn-danger"
+          data-dismiss="modal">Bilgilerimi güncelle</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<% include footer %>
+
+<script src="/admin/js/user.js"> </script>
+<script>
+  getUserforProfile(document.getElementById("username").textContent);
+  var patchUser = function () {
+    action = 0;
+  };
+  var patchUsername = function () {
+    action = 1;
+  };
+  var patchPassword = function () {
+    action = 2;
+  };
+</script>
