@@ -1,11 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
-const IndexController = require('../../controller/page/index');
+const IndexController = require("../../controller/admin/blog");
 
-router.route('/').get(IndexController.index);
-router.route('/post').get(IndexController.post);
-router.route('/contact').get(IndexController.contact);
-router.route('/about').get(IndexController.about);
+router.route("/").post(IndexController.getBlogs);
+router.route("/:title").post(IndexController.getBlogs);
+router.route("/addBlog").post(IndexController.addBlog);
 
 module.exports = router;

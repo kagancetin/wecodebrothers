@@ -3,7 +3,11 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
   name: String,
-  author: String,
+  author: {
+    type: String,
+    required: true,
+    unique: true
+  },
   username: {
     type: String,
     required: true,
@@ -13,6 +17,12 @@ var userSchema = new Schema({
     type: String,
     required: true
   },
+  blog: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Blog"
+    }
+  ],
   admin: Boolean,
   email: String,
   profil_photo: String,
@@ -24,9 +34,7 @@ var User = mongoose.model("User", userSchema);
 
 module.exports = User;
 
-User.find({
-  name: "admin"
-}, function (err, rs) {
+User.find({ name: "admin" }, function(err, rs) {
   if (rs == "") {
     const user = User({
       name: "admin",
